@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\TweetsController;
+use App\Http\Controllers\FollowersController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\FavoritesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +26,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::resource('users', UsersController::class)
+    ->middleware(['auth']);
+
+Route::resource('tweets', TweetsController::class)
+    ->middleware(['auth']);
+
+Route::resource('followers', FollowersController::class)
+    ->middleware(['auth']);
+
+Route::resource('comments', CommentsController::class)
+    ->middleware(['auth']);
+
+Route::resource('favorites', FavoritesController::class)
+    ->middleware(['auth']);
+
+require __DIR__ . '/auth.php';
