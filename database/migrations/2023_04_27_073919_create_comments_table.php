@@ -23,7 +23,7 @@ class CreateCommentsTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('text');
+            $table->string('comment');
             $table->softDeletes();
             $table->timestamps();
         });
