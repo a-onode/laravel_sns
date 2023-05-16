@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TweetFactory extends Factory
@@ -14,7 +15,7 @@ class TweetFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 50),
+            'user_id' => User::all()->random()->id,
             'tweet' => $this->faker->realText(),
             'created_at' => $this->faker->dateTime(),
         ];

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CommentFactory extends Factory
@@ -14,8 +15,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 50),
-            'tweet_id' => $this->faker->numberBetween(1, 50),
+            'user_id' => User::all()->random()->id,
+            'tweet_id' => $this->faker->numberBetween(1, 10),
             'comment' => $this->faker->realText(),
         ];
     }
