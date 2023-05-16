@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tweet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TweetsController extends Controller
 {
@@ -36,7 +37,12 @@ class TweetsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Tweet::create([
+            'user_id' => Auth::id(),
+            'tweet' => $request->tweet,
+        ]);
+
+        return redirect()->route('tweets.index');
     }
 
     /**
