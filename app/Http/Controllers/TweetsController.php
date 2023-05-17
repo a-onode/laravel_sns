@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tweet;
+use App\Models\Follower;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,11 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        $tweets = Tweet::all();
+        $followedIds = Follower::where('following_id', Auth::id())->select('followed_id')->pluck('followed_id')->toArray();
+        $followedIds[] = Auth::id();
+
+        $tweets = Tweet::whereIn('user_id', $followedIds)->latest()->get();
+
         return view('tweet.index', compact('tweets'));
     }
 

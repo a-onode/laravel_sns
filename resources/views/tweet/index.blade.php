@@ -31,15 +31,22 @@
                                             </a>
                                         </div>
                                         <div class="md:flex-grow">
-                                            <span class="font-semibold title-font text-gray-700 mr-2">{{ $tweet->user->name }}</span>
-                                            <span class="mt-1 text-gray-500 text-sm">{{ $tweet->created_at->diffForHumans() }}</span>
+                                            <div class="flex justify-between mr-2">
+                                                <div>
+                                                    <span class="font-semibold title-font text-gray-700 mr-2">{{ $tweet->user->name }}</span>
+                                                    <span class="mt-1 text-gray-500 text-sm">{{ $tweet->created_at->diffForHumans() }}</span>
+                                                </div>
+                                                @if ($tweet->user_id === Auth::id())
+                                                    <i class="fa-solid fa-ellipsis-vertical mr-2 text-lg"></i>
+                                                @endif
+                                            </div>
                                             <p class="leading-relaxed">{{ $tweet->tweet }}</p>
                                             <div class="flex justify-end mr-2">
                                                 <a class="flex ml-2 justify-center items-center" href="#">
                                                     <i class="fa-regular fa-message text-lg"></i>
                                                     <p class="ml-1 text-lg">{{ $tweet->comments->count() }}</p>
                                                 </a>
-                                                <a class="flex ml-2 justify-center items-center" href="#">
+                                                <a class="flex ml-4 justify-center items-center" href="#">
                                                     <i class="fa-regular fa-heart text-lg"></i>
                                                     <p class="ml-1 text-lg">{{ $tweet->favorites->count() }}</p>
                                                 </a>
