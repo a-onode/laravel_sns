@@ -41,14 +41,24 @@
                                                 @endif
                                             </div>
                                             <p class="leading-relaxed">{{ $tweet->tweet }}</p>
-                                            <div class="flex justify-end mr-2">
-                                                <a class="flex ml-2 justify-center items-center" href="#">
+                                            <div class="flex justify-end mr-2 mt-2">
+                                                @if (!in_array(Auth::id(), array_column($tweet->favorites->toArray(), 'user_id'), true))
+                                                    <form action="{{ route('favorites.store') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
+                                                        <button type="submit"><i class="fa-regular fa-heart text-lg"></i></button>
+                                                    </form>
+                                                @else
+                                                    <form action="{{ route('favorites.destroy', ['favorite' => $tweet->id]) }}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button type="submit"><i class="fa-solid fa-heart text-lg"></i></button>
+                                                    </form>
+                                                @endif
+                                                <p class="ml-1 text-lg">{{ $tweet->favorites->count() }}</p>
+                                                <a class="flex ml-4 justify-center items-center" href="#">
                                                     <i class="fa-regular fa-message text-lg"></i>
                                                     <p class="ml-1 text-lg">{{ $tweet->comments->count() }}</p>
-                                                </a>
-                                                <a class="flex ml-4 justify-center items-center" href="#">
-                                                    <i class="fa-regular fa-heart text-lg"></i>
-                                                    <p class="ml-1 text-lg">{{ $tweet->favorites->count() }}</p>
                                                 </a>
                                             </div>
                                         </div>
