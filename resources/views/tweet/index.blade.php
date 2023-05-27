@@ -14,7 +14,7 @@
                             <img class="inline-block h-10 w-10 rounded-full" src="{{ asset('storage/' . Auth::user()->image) }}">
                         </div>
                         <div class="min-w-0 flex-1">
-                            <form action="{{ route('tweets.store') }}" method="post">
+                            <form action="{{ route('tweets.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="border-b border-gray-200 focus-within:border-indigo-600">
                                     <label for="comment" class="sr-only">投稿を追加する</label>
@@ -110,11 +110,11 @@
                                         @endif
                                     </div>
                                     <p class="mt-2 text-gray-500">{{ $tweet->tweet }}</p>
-                                    @if (!$tweet->image === null)
-                                        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                                    @if (!is_null($tweet->image))
+                                        <div class="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
                                             <!-- We've used 3xl here, but feel free to try other max-widths based on your needs -->
-                                            <div class="mx-auto max-w-3xl">
-                                                <img src="{{ 'storage/' . $tweet->image }}">
+                                            <div class="flex justify-center mx-auto max-w-4xl">
+                                                <img src="{{ 'storage/' . $tweet->image }}" class="rounded-lg shadow-md">
                                             </div>
                                         </div>
                                     @endif

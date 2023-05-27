@@ -6,6 +6,8 @@ use App\Models\Follower;
 use App\Models\Tweet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class TweetsController extends Controller
 {
@@ -41,9 +43,19 @@ class TweetsController extends Controller
      */
     public function store(Request $request)
     {
+        $imageFile = $request->file('image');
+        if (!is_null($imageFile)) {
+            $fileName = uniqid(rand() . '_');
+            $extention = $imageFile->extension();
+            $fileNameToStore = $fileName . '.' . $extention;
+
+            Storage::putFileAs('public', $imageFile, $fileNameToStore);
+        }
+
         Tweet::create([
             'user_id' => Auth::id(),
             'tweet' => $request->tweet,
+            'image' => $fileNameToStore,
         ]);
 
         return redirect()->route('tweets.index');
