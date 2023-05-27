@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follower;
 use App\Models\Tweet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TweetsController extends Controller
 {
@@ -14,7 +16,10 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        $tweets = Tweet::all();
+        $followingId = Follower::where('following_id', Auth::id())->select('followed_id')->get();
+        $followingId[] = Auth::id();
+        $tweets = Tweet::whereIn('user_id', $followingId)->latest()->get();
+
         return view('tweet.index', compact('tweets'));
     }
 
@@ -36,7 +41,12 @@ class TweetsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Tweet::create([
+            'user_id' => Auth::id(),
+            'tweet' => $request->tweet,
+        ]);
+
+        return redirect()->route('tweets.index');
     }
 
     /**
