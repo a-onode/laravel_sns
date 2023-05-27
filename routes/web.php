@@ -38,7 +38,7 @@ Route::resource('followers', FollowersController::class)
 Route::resource('comments', CommentsController::class)
     ->middleware(['auth']);
 
-Route::resource('favorites', FritesController::class)
+Route::resource('favorites', FavoritesController::class)
     ->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

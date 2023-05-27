@@ -90,9 +90,14 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $tweet = Tweet::findOrFail($id);
+
+        $tweet->tweet = $request->tweet;
+        $tweet->save();
+
+        return redirect()->route('tweets.index');
     }
 
     /**
