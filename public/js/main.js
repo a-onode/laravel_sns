@@ -11,10 +11,10 @@ $(function () {
             });
 
             if ($(menu).hasClass('hidden')) {
-                $(menu).fadeIn().removeClass('hidden');
+                $(menu).fadeIn(100).removeClass('hidden');
                 return false;
             } else {
-                $(menu).fadeOut().addClass('hidden');
+                $(menu).fadeOut(100).addClass('hidden');
                 return false;
             }
         });
@@ -26,9 +26,14 @@ $(function () {
         $(this).on('click', function () {
             let target = $(this).data('target');
             let modal = document.getElementById(target);
-
             $(modal).fadeIn(100);
+
         });
+    });
+
+    $('.close-modal-button').on('click', function () {
+        $('.edit-modal').fadeOut(100);
+        return false;
     });
 });
 

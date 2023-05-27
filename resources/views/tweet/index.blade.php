@@ -112,7 +112,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div id="edit-tweet-{{ $tweet->id }}" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                                <div id="edit-tweet-{{ $tweet->id }}" class="edit-modal hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
 
                                     <div class="fixed inset-0 bg-gray-500 bg-opacity-20 transition-opacity"></div>
 
@@ -146,6 +146,9 @@
                                                                         </label>
                                                                     </div>
                                                                     <div class="flex-shrink-0">
+                                                                        <button type="button" class="close-modal-button inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold ttext-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" data-target="close-moodal-{{ $tweet->id }}">キャンセル</button>
+                                                                    </div>
+                                                                    <div class="flex-shrink-0">
                                                                         <button type="submit" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">編集する</button>
                                                                     </div>
                                                                 </div>
@@ -157,6 +160,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     @endforeach
