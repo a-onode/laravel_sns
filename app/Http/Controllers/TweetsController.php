@@ -45,12 +45,19 @@ class TweetsController extends Controller
         $imageFile = $request->file('image');
         if (!is_null($imageFile)) {
             $fileNameToStore = ImageService::upload($imageFile);
+
+            Tweet::create([
+                'user_id' => Auth::id(),
+                'tweet' => $request->tweet,
+                'image' => $fileNameToStore,
+            ]);
+
+            return redirect()->route('tweets.index');
         }
 
         Tweet::create([
             'user_id' => Auth::id(),
             'tweet' => $request->tweet,
-            'image' => $fileNameToStore,
         ]);
 
         return redirect()->route('tweets.index');
