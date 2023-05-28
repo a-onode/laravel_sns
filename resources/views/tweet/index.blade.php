@@ -74,7 +74,6 @@
                         <x-tweet.edit-modal :tweetId="$tweet->id" :tweet="$tweet->tweet" />
                     @endforeach
                 </div>
-
             </div>
         </div>
     </div>
