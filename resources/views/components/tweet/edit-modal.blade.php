@@ -16,7 +16,7 @@
                             @csrf
                             <div class="border-b border-gray-200 focus-within:border-indigo-600">
                                 <label for="tweet" class="sr-only">投稿を編集する</label>
-                                <textarea rows="3" name="tweet" id="tweet" class="block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-0 sm:text-sm sm:leading-6" placeholder="投稿を編集する">{{ $tweet }}</textarea>
+                                <textarea rows="3" name="tweet" id="tweet" class="block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-0 sm:text-sm sm:leading-6" placeholder="投稿を編集する">{{ $tweetText }}</textarea>
                             </div>
                             <div class="flex justify-end pt-2">
                                 <div class="flex items-center justify-between space-x-3 px-2 py-2 sm:px-3">

@@ -57,7 +57,7 @@
                                             </p>
                                         </div>
                                         @if ($tweet->user_id === Auth::id())
-                                            <x-tweet.dropdown :tweetId="$tweet->id" />
+                                            <x-tweet.dropdown :tweet="$tweet" />
                                         @endif
                                     </div>
                                     <p class="mt-2 text-gray-500">{{ $tweet->tweet }}</p>
@@ -71,8 +71,8 @@
                                 </div>
                             </div>
                         </div>
-                        <x-tweet.edit-modal :tweetId="$tweet->id" :tweet="$tweet->tweet" />
-                        <x-tweet.delete-modal :tweetId="$tweet->id" :tweet="$tweet->tweet" />
+                        <x-tweet.edit-modal :tweetId="$tweet->id" :tweetText="$tweet->tweet" />
+                        <x-tweet.delete-modal :tweetId="$tweet->id" :tweetText="$tweet->tweet" />
                     @endforeach
                 </div>
             </div>

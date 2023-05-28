@@ -22,7 +22,7 @@
                     <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                         <h3 class="text-base font-semibold leading-6 text-gray-900">この投稿を削除しますか？</h3>
                         <div class="mt-2">
-                            <p class="text-sm text-gray-500">{{ $tweet }}</p>
+                            <p class="text-sm text-gray-500">{{ $tweetText }}</p>
                         </div>
                     </div>
                 </div>

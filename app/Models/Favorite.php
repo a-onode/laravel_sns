@@ -10,4 +10,9 @@ class Favorite extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public $fillable = [
+        'user_id',
+        'tweet_id',
+    ];
 }

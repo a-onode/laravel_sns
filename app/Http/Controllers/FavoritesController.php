@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavoritesController extends Controller
 {
@@ -34,7 +36,12 @@ class FavoritesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Favorite::create([
+            'user_id' => Auth::id(),
+            'tweet_id' => $request->tweet_id,
+        ]);
+
+        return redirect()->route('tweets.index');
     }
 
     /**
@@ -79,6 +86,8 @@ class FavoritesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Favorite::where('tweet_id', $id)->where('user_id', Auth::id())->delete();
+
+        return redirect()->route('tweets.index');
     }
 }
