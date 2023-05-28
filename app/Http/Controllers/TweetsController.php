@@ -6,6 +6,7 @@ use App\Models\Follower;
 use App\Models\Tweet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Storage;
 use Image;
 
@@ -45,11 +46,7 @@ class TweetsController extends Controller
     {
         $imageFile = $request->file('image');
         if (!is_null($imageFile)) {
-            $fileName = uniqid(rand() . '_');
-            $extention = $imageFile->extension();
-            $fileNameToStore = $fileName . '.' . $extention;
-
-            Storage::putFileAs('public', $imageFile, $fileNameToStore);
+            $fileNameToStore = ImageService::upload($imageFile);
         }
 
         Tweet::create([
@@ -93,8 +90,13 @@ class TweetsController extends Controller
     public function update(Request $request, int $id)
     {
         $tweet = Tweet::findOrFail($id);
+        $imageFile = $request->file('image');
 
         $tweet->tweet = $request->tweet;
+        if (!is_null($imageFile)) {
+            $fileNameToStore = ImageService::upload($imageFile);
+            $tweet->image = $fileNameToStore;
+        }
         $tweet->save();
 
         return redirect()->route('tweets.index');
