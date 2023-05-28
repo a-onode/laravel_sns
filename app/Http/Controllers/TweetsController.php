@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Follower;
 use App\Models\Tweet;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Services\ImageService;
-use Illuminate\Support\Facades\Storage;
-use Image;
 
 class TweetsController extends Controller
 {
@@ -108,8 +106,11 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $tweet = Tweet::findOrFail($id);
+        $tweet->delete();
+
+        return redirect()->route('tweets.index');
     }
 }
