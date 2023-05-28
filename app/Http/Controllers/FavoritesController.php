@@ -41,7 +41,7 @@ class FavoritesController extends Controller
             'tweet_id' => $request->tweet_id,
         ]);
 
-        return redirect()->route('tweets.index');
+        return response()->json();
     }
 
     /**
@@ -88,6 +88,6 @@ class FavoritesController extends Controller
     {
         Favorite::where('tweet_id', $id)->where('user_id', Auth::id())->delete();
 
-        return redirect()->route('tweets.index');
+        return response()->json();
     }
 }

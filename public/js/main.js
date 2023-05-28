@@ -57,9 +57,11 @@ $(function () {
 
 $(function () {
     $('.favorite-button').on('click', function () { //onはイベントハンドラー
-        let tweetId = $(this).data('favorite');
+        let favoriteTweetId = $(this).data('favorite');
+        let svg = $(this).children('svg');
+        let p = $(this).children('p');
+        let button = $(this);
 
-        //ajax処理スタート
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -67,14 +69,49 @@ $(function () {
             url: '/favorites', //通信先アドレス
             method: 'POST', //HTTPメソッド
             data: { //サーバーに送信するデータ
-                'tweet_id': tweetId //いいねされた投稿のidを送る
+                'tweet_id': favoriteTweetId //いいねされた投稿のidを送る
             },
         })
-            //通信成功した時の処理
+
             .done(function (data) {
-                console.log(data); //likedクラスのON/OFF切り替え。
+                button.removeClass('favorite-button');
+                button.addClass('unfavorite-button');
+                svg.removeClass('text-gray-400 group-hover:text-gray-500');
+                svg.addClass('text-yellow-400 group-hover:text-yellow-500');
+                p.html('お気に入り解除');
             })
-            //通信失敗した時の処理
+            .fail(function () {
+                console.log('fail');
+            });
+    });
+});
+
+$(function () {
+    $('.unfavorite-button').on('click', function () {
+        let unFavoriteTweetId = $(this).data('favorite');
+        let svg = $(this).children('svg');
+        let p = $(this).children('p');
+        let button = $(this);
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/favorites/' + unFavoriteTweetId,
+            method: 'POST',
+            data: {
+                'tweet_id': unFavoriteTweetId,
+                '_method': 'DELETE'
+            },
+        })
+
+            .done(function (data) {
+                button.removeClass('unfavorite-button');
+                button.addClass('favorite-button');
+                svg.removeClass('text-yellow-400 group-hover:text-yellow-500');
+                svg.addClass('text-gray-400 group-hover:text-gray-500');
+                p.html('お気に入り');
+            })
             .fail(function () {
                 console.log('fail');
             });

@@ -11,27 +11,27 @@
         <div id="drop-menu-{{ $tweet->id }}" class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-0-button" tabindex="-1">
             <div class="py-1" role="none">
                 @if (!in_array(Auth::id(), array_column($tweet->favorites->toArray(), 'user_id'), true))
-                    <form action="{{ route('favorites.store') }}" method="post" class="text-gray-700 group flex items-center px-4 py-2 text-sm cursor-pointer" role="menuitem" tabindex="-1">
+                    <form action="#" method="post" class="text-gray-700 group flex items-center px-4 py-2 text-sm cursor-pointer" role="menuitem" tabindex="-1">
                         @csrf
                         <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                        <button type="submit" class="favorite-button flex" data-favorite="{{ $tweet->id }}">
-                            <svg class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <button type="button" class="favorite-button flex" data-favorite="{{ $tweet->id }}">
+                            <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
                                     clip-rule="evenodd" />
                             </svg>
-                            お気に入り
+                            <p>お気に入り</p>
                         </button>
                     </form>
                 @else
-                    <form action="{{ route('favorites.destroy', ['favorite' => $tweet->id]) }}" method="post" class="text-gray-700 group flex items-center px-4 py-2 text-sm cursor-pointer" role="menuitem" tabindex="-1">
-                        @method('delete')
+                    <form action="#" method="post" class="text-gray-700 group flex items-center px-4 py-2 text-sm cursor-pointer" role="menuitem" tabindex="-1">
+
                         @csrf
-                        <button type="submit" class="favorite-button flex" data-favorite="{{ $tweet->id }}">
+                        <button type="button" class="unfavorite-button flex" data-favorite="{{ $tweet->id }}">
                             <svg class="mr-3 h-5 w-5 text-yellow-400 group-hover:text-yellow-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
                                     clip-rule="evenodd" />
                             </svg>
-                            お気に入り解除
+                            <p>お気に入り解除</p>
                         </button>
                     </form>
                 @endif
