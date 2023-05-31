@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('tweets.index')" :active="request()->routeIs('tweets.index')">
                         ホーム
                     </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        マイページ
+                    </x-nav-link>
                 </div>
             </div>
 
