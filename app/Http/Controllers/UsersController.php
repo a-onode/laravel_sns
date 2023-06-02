@@ -58,9 +58,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -72,7 +74,16 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->name = $request->name;
+        $user->description = $request->description;
+        $user->save();
+
+        return redirect()->route('users.edit', compact('user'))
+            ->with([
+                'message' => 'プロフィールを更新しました。',
+            ]);
     }
 
     /**
