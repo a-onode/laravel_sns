@@ -6,10 +6,6 @@ $(function () {
             let target = $(this).data('target');
             let menu = document.getElementById(target);
 
-            // $(document).on('click', function () {
-            //     $(menu).fadeOut().addClass('hidden');
-            // });
-
             if ($(menu).hasClass('hidden')) {
                 $(menu).fadeIn(100).removeClass('hidden');
                 return false;
@@ -115,5 +111,12 @@ $(function () {
             .fail(function () {
                 console.log('fail');
             });
+    });
+});
+
+//Close flash message
+$(function () {
+    $('#close-message-button').on('click', function () {
+        $('#flash-message').fadeOut(100);
     });
 });
