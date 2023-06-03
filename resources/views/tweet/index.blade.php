@@ -16,7 +16,7 @@
                             <form action="{{ route('tweets.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="border-b border-gray-200 focus-within:border-indigo-600">
-                                    <label for="comment" class="sr-only">投稿を追加する</label>
+                                    <label for="post" class="sr-only">投稿を追加する</label>
                                     <textarea rows="3" name="tweet" id="tweet" class="block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-0 sm:text-sm sm:leading-6" placeholder="投稿を追加する"></textarea>
                                 </div>
                                 <div class="flex justify-end pt-2">
@@ -29,11 +29,12 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                                 <span id="file-name" class="text-sm italic text-gray-500 group-hover:text-gray-600">ファイルを追加する</span>
-                                                <input id="image" name="image" type="file" class="sr-only">
+                                                <input id="image" name="image" type="file" class="sr-only" accept="image/png,image/jpeg,image/jpg">
                                             </label>
                                         </div>
                                         <div class="flex-shrink-0">
-                                            <button type="submit" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">投稿する</button>
+
+                                            <button type="submit" id="submit-button" class="inline-flex items-center rounded-md bg-indigo-200 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" disabled>投稿する</button>
                                         </div>
                                     </div>
                                 </div>
@@ -88,6 +89,21 @@
                 const inputFile = fileForm.files[0];
                 console.log(inputFile.name);
                 fileName.innerText = inputFile.name;
+            }
+        });
+
+        const textField = document.getElementById('tweet');
+        const submitButton = document.getElementById('submit-button');
+
+        textField.addEventListener('keyup', () => {
+            if (textField.value !== '') {
+                submitButton.disabled = false;
+                submitButton.classList.remove('bg-indigo-200');
+                submitButton.classList.add('bg-indigo-600', 'hover:bg-indigo-500');
+            } else {
+                submitButton.disabled = true;
+                submitButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-500');
+                submitButton.classList.add('bg-indigo-200');
             }
         });
     </script>
