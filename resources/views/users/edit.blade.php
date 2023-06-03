@@ -9,25 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <!--
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
-
                     <x-flash-message />
                     <form action="{{ route('users.update', ['user' => $user->id]) }}" method="post" enctype="multipart/form-data">
                         @method('put')
                         @csrf
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
                         <div class="space-y-12 sm:space-y-16">
                             <div>
                                 <h2 class="text-base font-semibold leading-7 text-gray-900">プロフィール情報</h2>
@@ -35,18 +21,38 @@
                                 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                         <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">名前</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <input type="text" name="name" id="name"value="{{ $user->name }}" autocomplete="name"
+                                        @if (!$errors->has('name'))
+                                            <input type="text" name="name" id="name" value="{{ $user->name }}" autocomplete="name"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                        </div>
+                                        @else
+                                            <div class="relative mt-2 rounded-md shadow-sm">
+                                                <input type="text" name="name" id="name" value="{{ old('name') }}" autocomplete="name" class="block w-full rounded-md border-0 py-1.5 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6">
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                    <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">メールアドレス</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                        @if (!$errors->has('email'))
                                             <input id="email" name="email" type="email" value="{{ $user->email }}" autocomplete="email"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-md sm:text-sm sm:leading-6">
-                                        </div>
+                                        @else
+                                            <div class="relative mt-2 rounded-md shadow-sm">
+                                                <input type="email" name="email" id="email" value="{{ old('email') }}" autocomplete="email"
+                                                    class="block w-full rounded-md border-0 py-1.5 text-red-900 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:max-w-md sm:text-sm sm:leading-6">
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                    <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                     </div>
 
                                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -69,7 +75,7 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                                 <span id="file-name" class="text-sm italic text-gray-500 group-hover:text-gray-600">ファイルを編集する</span>
-                                                <input id="image" name="image" type="file" class="sr-only">
+                                                <input id="image" name="image" type="file" class="sr-only" accept="image/png,image/jpeg,image/jpg">
                                             </label>
                                         </div>
                                     </div>

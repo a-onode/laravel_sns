@@ -119,5 +119,9 @@ $(function () {
     $('#close-message-button').on('click', function () {
         $('#flash-message').fadeOut(100);
     });
+
+    setTimeout(function () {
+        $('#flash-message').fadeOut(100);
+    }, 5000);
 });
 
