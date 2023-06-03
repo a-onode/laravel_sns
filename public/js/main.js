@@ -120,3 +120,4 @@ $(function () {
         $('#flash-message').fadeOut(100);
     });
 });
+

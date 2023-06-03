@@ -30,8 +30,7 @@
                         @csrf
                         <div class="space-y-12 sm:space-y-16">
                             <div>
-                                <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
-                                <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
+                                <h2 class="text-base font-semibold leading-7 text-gray-900">プロフィール情報</h2>
 
                                 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -69,7 +68,7 @@
                                                         d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
                                                         clip-rule="evenodd" />
                                                 </svg>
-                                                <span class="text-sm italic text-gray-500 group-hover:text-gray-600">ファイルを編集する</span>
+                                                <span id="file-name" class="text-sm italic text-gray-500 group-hover:text-gray-600">ファイルを編集する</span>
                                                 <input id="image" name="image" type="file" class="sr-only">
                                             </label>
                                         </div>
@@ -102,13 +101,25 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
-                            <button type="button" class="text-sm font-semibold leading-6 text-gray-900">キャンセル</button>
+                            <button type="button" class="text-sm font-semibold leading-6 text-gray-900" onclick="location.href='{{ route('users.index') }}'">キャンセル</button>
                             <button type="submit" class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">保存する</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        'use strict'
+        const fileForm = document.getElementById('image');
+        const fileName = document.getElementById('file-name');
+
+        fileForm.addEventListener('change', () => {
+            if (window.File) {
+                const inputFile = fileForm.files[0];
+                console.log(inputFile.name);
+                fileName.innerText = inputFile.name;
+            }
+        });
+    </script>
 </x-app-layout>
