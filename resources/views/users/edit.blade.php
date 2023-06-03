@@ -25,7 +25,7 @@
 -->
 
                     <x-flash-message />
-                    <form action="{{ route('users.update', ['user' => $user->id]) }}" method="post">
+                    <form action="{{ route('users.update', ['user' => $user->id]) }}" method="post" enctype="multipart/form-data">
                         @method('put')
                         @csrf
                         <div class="space-y-12 sm:space-y-16">
@@ -59,12 +59,19 @@
 
                                     <div class="sm:grid sm:grid-cols-3 sm:items-center sm:gap-4 sm:py-6">
                                         <label for="image" class="block text-sm font-medium leading-6 text-gray-900">プロフィール画像</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <div class="flex items-center gap-x-3">
-                                                <img src="{{ asset('storage/' . $user->image) }}" class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                                <input id="image" name="image" type="file" class="sr-only">
-                                                <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Change</button>
+                                        <div class="flex mt-2 sm:col-span-2 sm:mt-0">
+                                            <div class="mr-2">
+                                                <img src="{{ asset('storage/' . $user->image) }}" class="rounded-full h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                             </div>
+                                            <label class="group -my-2 -ml-2 inline-flex items-center rounded-full px-3 py-2 text-left text-gray-400">
+                                                <svg class="h-5 w-5 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="text-sm italic text-gray-500 group-hover:text-gray-600">ファイルを編集する</span>
+                                                <input id="image" name="image" type="file" class="sr-only">
+                                            </label>
                                         </div>
                                     </div>
 

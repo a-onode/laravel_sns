@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,12 +73,18 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $user = User::findOrFail($id);
+        $imageFile = $request->file('image');
+
 
         $user->name = $request->name;
         $user->description = $request->description;
+        if (!is_null($imageFile)) {
+            $fileNameToStore = ImageService::upload($imageFile);
+            $user->image = $fileNameToStore;
+        }
         $user->save();
 
         return redirect()->route('users.edit', compact('user'))
