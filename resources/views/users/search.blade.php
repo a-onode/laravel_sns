@@ -72,7 +72,9 @@
                             <p class="mt-2 text-gray-500">検索にヒットしない場合は。別の検索ワードでも試してみましょう。</p>
                         </div>
                     @endif
+                    <div class="mt-6">{{ $users->links() }}</div>
                 </div>
+
             </div>
         </div>
     </div>
