@@ -16,10 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('tweets.index')" :active="request()->routeIs('tweets.index')">
-                        ホーム
+                        {{ __('ホーム') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('users.search')" :active="request()->routeIs('users.search')">
+                        {{ __('ユーザ検索') }}
                     </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                        マイページ
+                        {{ __('マイページ') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -70,6 +73,15 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('tweets.index')" :active="request()->routeIs('tweets.index')">
+                {{ __('ホーム') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('users.search')" :active="request()->routeIs('users.search')">
+                {{ __('ユーザ検索') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                {{ __('マイページ') }}
             </x-responsive-nav-link>
         </div>
 

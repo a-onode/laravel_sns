@@ -49,9 +49,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        if ($user->id === Auth::id()) {
+        } else {
+            return view('users.show', compact('user'));
+        }
     }
 
     /**
@@ -103,5 +108,27 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $query = User::query();
+
+        if (!is_null($keyword)) {
+            $spaceConvert = mb_convert_kana($keyword, 's');
+            $keywords = preg_split('/[\s]+/', $spaceConvert, -1, PREG_SPLIT_NO_EMPTY);
+
+            foreach ($keywords as $keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            }
+
+            $users = $query->paginate(20);
+
+            return view('users.search', compact('users', 'keyword'));
+        } else {
+            $users = $query->paginate(20);
+            return view('users.search', compact('users'));
+        }
     }
 }
