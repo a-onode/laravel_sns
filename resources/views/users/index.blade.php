@@ -17,6 +17,7 @@
                             <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
                                 <div class="flex">
                                     <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 bg-white" src="{{ asset('storage/' . $user->image) }}" alt="">
+                                    <span class="absolute right-0 top-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white"></span>
                                 </div>
                                 <div class="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                                     <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">
@@ -67,8 +68,13 @@
                             @foreach ($user->tweets as $tweet)
                                 <div class="bg-white px-4 py-5 sm:px-6 border-b border-gray-200 pb-5">
                                     <div class="flex space-x-4">
-                                        <div class="flex-shrink-0">
+                                        <div class="relative flex-shrink-0">
                                             <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $tweet->user->image) }}" alt="">
+                                            @if ($user->isOnline())
+                                                <span class="absolute right-0 top-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white"></span>
+                                            @else
+                                                <span class="absolute right-0 top-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+                                            @endif
                                         </div>
                                         <div class="min-w-0 flex-1">
                                             <div class="flex justify-between">

@@ -9,8 +9,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex items-start space-x-4">
-                        <div class="flex-shrink-0">
+                        <div class="relative flex-shrink-0">
                             <img class="inline-block h-10 w-10 rounded-full" src="{{ asset('storage/' . Auth::user()->image) }}">
+                            @if (Auth::user()->isOnline())
+                                <span class="absolute right-0 top-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white"></span>
+                            @else
+                                <span class="absolute right-0 top-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+                            @endif
                         </div>
                         <div class="min-w-0 flex-1">
                             <form action="{{ route('tweets.store') }}" method="post" enctype="multipart/form-data">
@@ -44,8 +49,13 @@
                     @foreach ($tweets as $tweet)
                         <div class="bg-white px-4 py-5 sm:px-6 border-b border-gray-200 pb-5">
                             <div class="flex space-x-4">
-                                <div class="flex-shrink-0">
+                                <div class="relative flex-shrink-0">
                                     <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $tweet->user->image) }}" alt="">
+                                    @if ($tweet->user->isOnline())
+                                        <span class="absolute right-0 top-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white"></span>
+                                    @else
+                                        <span class="absolute right-0 top-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+                                    @endif
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <div class="flex justify-between">
