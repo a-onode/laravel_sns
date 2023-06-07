@@ -17,7 +17,6 @@
                             <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
                                 <div class="flex">
                                     <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 bg-white" src="{{ asset('storage/' . $user->image) }}" alt="">
-                                    <span class="absolute right-0 top-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white"></span>
                                 </div>
                                 <div class="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                                     <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">

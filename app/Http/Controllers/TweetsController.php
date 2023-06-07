@@ -105,7 +105,10 @@ class TweetsController extends Controller
         }
         $tweet->save();
 
-        return redirect()->route('tweets.index');
+        return redirect()->route('tweets.index')
+            ->with([
+                'message' => '投稿を更新しました。',
+            ]);
     }
 
     /**
@@ -119,6 +122,9 @@ class TweetsController extends Controller
         $tweet = Tweet::findOrFail($id);
         $tweet->delete();
 
-        return redirect()->route('tweets.index');
+        return redirect()->route('tweets.index')
+            ->with([
+                'message' => '投稿を削除しました。',
+            ]);
     }
 }
