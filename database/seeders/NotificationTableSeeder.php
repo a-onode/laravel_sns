@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class Notification extends Seeder
+class NotificationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

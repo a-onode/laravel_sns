@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Tweet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CommentFactory extends Factory
+class NotificationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,10 @@ class CommentFactory extends Factory
     {
         return [
             'user_id' => User::all()->random()->id,
+            'server_id' => User::all()->random()->id,
             'tweet_id' => Tweet::all()->random()->id,
-            'comment' => $this->faker->realText(),
+            'type' => $this->faker->randomElement([1, 2, 3]),
+            'status' => $this->faker->randomElement([0, 1]),
         ];
     }
 }
