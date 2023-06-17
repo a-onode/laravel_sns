@@ -22,7 +22,7 @@ class TweetsController extends Controller
         $followingId[] = Auth::id();
         $tweets = Tweet::whereIn('user_id', $followingId)->latest()->get();
 
-        return view('tweet.index', compact('tweets'));
+        return view('tweets.index', compact('tweets'));
     }
 
     /**
@@ -72,7 +72,9 @@ class TweetsController extends Controller
      */
     public function show($id)
     {
-        //
+        $tweet = Tweet::findOrFail($id);
+
+        return view('tweets.show', compact('tweet'));
     }
 
     /**

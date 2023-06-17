@@ -53,7 +53,7 @@
                         <div class="bg-white px-4 py-5 sm:px-6 border-b border-gray-200 pb-5">
                             <div class="flex space-x-4">
                                 <div class="relative flex-shrink-0">
-                                    <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $tweet->user->image) }}" alt="">
+                                    <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $tweet->user->image) }}">
                                     @if ($tweet->user->isOnline())
                                         <span class="absolute right-0 top-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white"></span>
                                     @else
@@ -74,7 +74,9 @@
                                             <x-tweet.dropdown :tweet="$tweet" />
                                         @endif
                                     </div>
-                                    <p class="mt-2 text-gray-500">{{ $tweet->tweet }}</p>
+                                    <a href="{{ route('tweets.show', ['tweet' => $tweet->id]) }}">
+                                        <p class="mt-2 text-gray-500">{{ $tweet->tweet }}</p>
+                                    </a>
                                     @if (!is_null($tweet->image))
                                         <div class="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
                                             <div class="flex justify-center mx-auto max-w-4xl">
