@@ -7,8 +7,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
             <div class="bg-white px-4 pt-5 sm:px-6">
+                <x-flash-message />
                 <div class="flex space-x-4">
                     <div class="relative flex-shrink-0">
                         <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $tweet->user->image) }}">
@@ -83,9 +83,11 @@
                     <div class="mt-6 flex gap-x-3">
                         <img src="{{ asset('storage/' . Auth::user()->image) }}" class="h-6 w-6 flex-none rounded-full bg-gray-50">
                         <form action="{{ route('comments.store') }}" method="post" class="relative flex-auto">
+                            @csrf
                             <div class="overflow-hidden rounded-lg pb-12 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
                                 <label for="comment" class="sr-only"></label>
                                 <textarea rows="2" name="comment" id="comment" class="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="コメントを追加する"></textarea>
+                                <input type="hidden" name="tweet_id" id="tweet_id" value="{{ $tweet->id }}">
                             </div>
                             <div class="absolute inset-x-0 bottom-0 flex justify-end py-2 pl-3 pr-2">
                                 <button type="submit" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">コメントする</button>

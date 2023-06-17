@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
@@ -34,7 +36,18 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tweet = $request->tweet_id;
+
+        Comment::create([
+            'user_id' => Auth::id(),
+            'tweet_id' => $tweet,
+            'comment' => $request->comment,
+        ]);
+
+        return redirect()->route('tweets.show', compact('tweet'))
+            ->with([
+                'message' => 'コメントを追加しました。',
+            ]);
     }
 
     /**
