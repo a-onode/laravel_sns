@@ -19,7 +19,7 @@ class CreateNotificationsTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('server_id')
+            $table->foreignId('serve_id')
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

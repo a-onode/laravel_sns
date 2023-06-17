@@ -5,6 +5,7 @@ use App\Http\Controllers\TweetsController;
 use App\Http\Controllers\FollowersController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\NotificationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,9 @@ Route::resource('comments', CommentsController::class)
     ->middleware(['auth']);
 
 Route::resource('favorites', FavoritesController::class)
+    ->middleware(['auth']);
+
+Route::resource('notifications', NotificationsController::class)
     ->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

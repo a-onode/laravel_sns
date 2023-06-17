@@ -17,7 +17,7 @@ class NotificationFactory extends Factory
     {
         return [
             'user_id' => User::all()->random()->id,
-            'server_id' => User::all()->random()->id,
+            'serve_id' => User::all()->random()->id,
             'tweet_id' => Tweet::all()->random()->id,
             'type' => $this->faker->randomElement([1, 2, 3]),
             'status' => $this->faker->randomElement([0, 1]),
