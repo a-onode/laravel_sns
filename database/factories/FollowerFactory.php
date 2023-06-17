@@ -15,8 +15,6 @@ class FollowerFactory extends Factory
     public function definition()
     {
         return [
-            // 'following_id' => $this->faker->unique()->numberBetween(1, 10),
-            // 'followed_id' => $this->faker->numberBetween(1, 10),
             'following_id' => User::all()->random()->id,
             'followed_id' => User::all()->random()->id,
         ];

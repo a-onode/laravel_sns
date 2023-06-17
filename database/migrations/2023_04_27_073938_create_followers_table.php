@@ -17,10 +17,10 @@ class CreateFollowersTable extends Migration
             $table->unsignedBigInteger('following_id');
             $table->unsignedBigInteger('followed_id');
 
-            $table->unique([
-                'following_id',
-                'followed_id',
-            ]);
+            // $table->unique([
+            //     'following_id',
+            //     'followed_id',
+            // ]);
         });
     }
 

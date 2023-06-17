@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Notification;
 use Illuminate\Database\Seeder;
 
 class NotificationTableSeeder extends Seeder
@@ -13,6 +14,6 @@ class NotificationTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Notification::factory(10)->create();
     }
 }

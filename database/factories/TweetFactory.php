@@ -15,7 +15,7 @@ class TweetFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id,
+            'user_id' => User::factory(),
             'tweet' => $this->faker->realText(),
             'created_at' => $this->faker->dateTime(),
         ];
