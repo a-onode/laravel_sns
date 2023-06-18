@@ -64,7 +64,7 @@
                                     <div class="flex justify-between">
                                         <div>
                                             <p class="text-sm font-semibold text-gray-900">
-                                                <a href="#" class="hover:underline">{{ $tweet->user->name }}</a>
+                                                <a href="{{ route('users.show', ['user' => $tweet->user->id]) }}" class="hover:underline">{{ $tweet->user->name }}</a>
                                             </p>
                                             <p class="text-sm text-gray-500">
                                                 <a href="#" class="hover:underline">{{ $tweet->created_at->diffForHumans() }}</a>

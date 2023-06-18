@@ -51,12 +51,17 @@ class User extends Authenticatable
 
     public function followers()
     {
-        $this->belongsToMany(self::class, 'followers', 'followed_id', 'following_id');
+        return $this->belongsToMany(self::class, 'followers', 'followed_id', 'following_id');
     }
 
     public function follows()
     {
-        $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
+        return $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
+    }
+
+    public function isFollow(int $id)
+    {
+        return (bool) $this->followers()->where('following_id', $id)->exists();
     }
 
     public function isOnline()

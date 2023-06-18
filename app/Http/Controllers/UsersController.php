@@ -54,6 +54,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         if ($user->id === Auth::id()) {
+            return redirect()->route('users.index', compact('user'));
         } else {
             return view('users.show', compact('user'));
         }

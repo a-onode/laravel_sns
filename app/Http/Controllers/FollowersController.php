@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Follower;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FollowersController extends Controller
 {
@@ -34,7 +37,13 @@ class FollowersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::findOrFail($request->user_id);
+        Auth::user()->follows()->attach($user->id);
+
+        return redirect()->route('users.show', compact('user'))
+            ->with([
+                'message' => $user->name . 'さんのフォローをしました。'
+            ]);
     }
 
     /**
@@ -77,8 +86,14 @@ class FollowersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $user = User::findOrFail($id);
+        Auth::user()->follows()->detach($user->id);
+
+        return redirect()->route('users.show', compact('user'))
+            ->with([
+                'message' => $user->name . 'さんのフォローを解除しました。'
+            ]);
     }
 }
