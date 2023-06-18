@@ -29,6 +29,18 @@
                                 </div>
                                 <div class="flex justify-end pt-2">
                                     <div class="flex items-center justify-between space-x-3 px-2 py-2 sm:px-3">
+                                        <div class="space-y-5">
+                                            <div class="relative flex items-start">
+                                                <div class="flex h-6 items-center">
+                                                    <input aria-describedby="slack-notification" id="slack" name="slack" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-transparent">
+                                                </div>
+                                                <div class="ml-3 text-sm leading-6">
+                                                    <label for="slack" class="font-medium text-gray-900"></label>
+                                                    <p id="comments-description" class="text-gray-500">Slackへ通知する</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="flex">
                                             <label class="group -my-2 -ml-2 inline-flex items-center rounded-full px-3 py-2 text-left text-gray-400">
                                                 <svg class="-ml-1 mr-2 h-5 w-5 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -41,7 +53,6 @@
                                             </label>
                                         </div>
                                         <div class="flex-shrink-0">
-
                                             <button type="submit" id="submit-button" class="inline-flex items-center rounded-md bg-indigo-200 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" disabled>投稿する</button>
                                         </div>
                                     </div>

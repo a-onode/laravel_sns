@@ -8,9 +8,17 @@ use App\Services\ImageService;
 use App\Http\Requests\TweetStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\SlackNotificationServiceInterface;
 
 class TweetsController extends Controller
 {
+    private $slack_notification_service_interface;
+
+    public function __construct(SlackNotificationServiceInterface $slack_notification_service_interface)
+    {
+        $this->slack_notification_service_interface = $slack_notification_service_interface;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,22 +52,35 @@ class TweetsController extends Controller
     public function store(TweetStoreRequest $request)
     {
         $imageFile = $request->file('image');
+
         if (!is_null($imageFile)) {
             $fileNameToStore = ImageService::upload($imageFile);
 
-            Tweet::create([
+            $tweet = Tweet::create([
                 'user_id' => Auth::id(),
                 'tweet' => $request->tweet,
                 'image' => $fileNameToStore,
             ]);
 
+            $isSlackChecked = $request->has('slack');
+            if ($isSlackChecked) {
+                $tweetPath = url()->full() . '/' . $tweet->id;
+                $this->slack_notification_service_interface->send('<!here>' . "\n" . Auth::user()->name . 'さんが新しい投稿をしました。' . "\n" . "\n" . '↓内容を確認する↓' . "\n" . $tweetPath);
+            }
+
             return redirect()->route('tweets.index');
         }
 
-        Tweet::create([
+        $tweet = Tweet::create([
             'user_id' => Auth::id(),
             'tweet' => $request->tweet,
         ]);
+
+        $isSlackChecked = $request->has('slack');
+        if ($isSlackChecked) {
+            $tweetPath = url()->full() . '/' . $tweet->id;
+            $this->slack_notification_service_interface->send('<!here>' . "\n" . Auth::user()->name . 'さんが新しい投稿をしました。' . "\n" . "\n" . '↓内容を確認する↓' . "\n" . $tweetPath);
+        }
 
         return redirect()->route('tweets.index');
     }
