@@ -828,6 +828,9 @@ select {
 .inline-flex {
   display: inline-flex;
 }
+.table {
+  display: table;
+}
 .grid {
   display: grid;
 }
@@ -1149,6 +1152,9 @@ select {
 }
 .whitespace-nowrap {
   white-space: nowrap;
+}
+.break-all {
+  word-break: break-all;
 }
 .rounded {
   border-radius: 0.25rem;

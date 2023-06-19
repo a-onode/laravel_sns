@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TweetsController;
 use App\Http\Controllers\FollowersController;
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/calendar', function () {
+    return view('calendar');
 });
 
 Route::get('/user/search', [UsersController::class, 'search'])
@@ -47,6 +52,9 @@ Route::resource('favorites', FavoritesController::class)
     ->middleware(['auth']);
 
 Route::resource('notifications', NotificationsController::class)
+    ->middleware(['auth']);
+
+Route::resource('calendars', CalendarController::class)
     ->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
