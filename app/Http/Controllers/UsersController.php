@@ -87,13 +87,18 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $imageFile = $request->file('image');
-
+        $backgroundImageFile = $request->file('background-image');
 
         $user->name = $request->name;
         $user->description = $request->description;
         if (!is_null($imageFile)) {
             $fileNameToStore = ImageService::upload($imageFile);
             $user->image = $fileNameToStore;
+        }
+
+        if (!is_null($backgroundImageFile)) {
+            $fileNameToStore = ImageService::upload($backgroundImageFile);
+            $user->background_image = $fileNameToStore;
         }
         $user->save();
 

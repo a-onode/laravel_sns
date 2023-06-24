@@ -81,7 +81,7 @@
                                     </div>
 
                                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                        <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">ヘッダー画像</label>
+                                        <label for="background-image" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">ヘッダー画像</label>
                                         <div class="mt-2 sm:col-span-2 sm:mt-0">
                                             <div class="flex max-w-2xl justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                                                 <div class="text-center">
@@ -91,13 +91,12 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                     <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                                                        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                                                            <span>Upload a file</span>
-                                                            <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                                        <label for="background-image" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                                            <span>ファイルを選択する</span>
+                                                            <input id="background-image" name="background-image" type="file" class="sr-only">
                                                         </label>
-                                                        <p class="pl-1">or drag and drop</p>
+                                                        <p class="pl-1">もしくはドラック＆ドロップする</p>
                                                     </div>
-                                                    <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
                                                 </div>
                                             </div>
                                         </div>
