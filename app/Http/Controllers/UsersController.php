@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Services\ImageService;
-use Illuminate\Http\Request;
 use App\Http\Requests\UpdateUserRequest;
+use App\Services\ImageService;
+use App\Services\UserService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
@@ -18,8 +19,9 @@ class UsersController extends Controller
     public function index()
     {
         $user = User::findOrFail(Auth::id());
+        $favoriteTweets = UserService::getFavoriteTweets(Auth::id());
 
-        return view('users.index', compact('user'));
+        return view('users.index', compact('user', 'favoriteTweets'));
     }
 
     /**
@@ -52,11 +54,12 @@ class UsersController extends Controller
     public function show(int $id)
     {
         $user = User::findOrFail($id);
+        $favoriteTweets = UserService::getFavoriteTweets($id);
 
         if ($user->id === Auth::id()) {
-            return redirect()->route('users.index', compact('user'));
+            return redirect()->route('users.index', compact('user', 'favoriteTweets'));
         } else {
-            return view('users.show', compact('user'));
+            return view('users.show', compact('user', 'favoriteTweets'));
         }
     }
 
