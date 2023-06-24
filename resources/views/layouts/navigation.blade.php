@@ -22,9 +22,6 @@
                     <x-nav-link :href="route('users.search')" :active="request()->routeIs('users.search')">
                         {{ __('ユーザ検索') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('calendars.index')" :active="request()->routeIs('calendars.index')">
-                        {{ __('カレンダー') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('マイページ') }}
                     </x-nav-link>
