@@ -60,7 +60,7 @@ $(function () {
 });
 
 $(function () {
-    $('.favorite-button').on('click', function () { //onはイベントハンドラー
+    $(document).on('click', '.favorite-button', function () { //onはイベントハンドラー
         let favoriteTweetId = $(this).data('favorite');
         let svg = $(this).children('svg');
         let p = $(this).children('p');
@@ -76,7 +76,6 @@ $(function () {
                 'tweet_id': favoriteTweetId //いいねされた投稿のidを送る
             },
         })
-
             .done(function (data) {
                 button.removeClass('favorite-button');
                 button.addClass('unfavorite-button');
@@ -91,7 +90,7 @@ $(function () {
 });
 
 $(function () {
-    $('.unfavorite-button').on('click', function () {
+    $(document).on('click', '.unfavorite-button', function () {
         let unFavoriteTweetId = $(this).data('favorite');
         let svg = $(this).children('svg');
         let p = $(this).children('p');
@@ -108,7 +107,6 @@ $(function () {
                 '_method': 'DELETE'
             },
         })
-
             .done(function (data) {
                 button.removeClass('unfavorite-button');
                 button.addClass('favorite-button');
