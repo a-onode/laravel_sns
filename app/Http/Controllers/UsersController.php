@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Tweet;
 use App\Http\Requests\UpdateUserRequest;
 use App\Services\ImageService;
 use App\Services\UserService;
@@ -20,8 +21,9 @@ class UsersController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $favoriteTweets = UserService::getFavoriteTweets(Auth::id());
+        $tweets = Tweet::where('user_id', Auth::id())->latest()->get();
 
-        return view('users.index', compact('user', 'favoriteTweets'));
+        return view('users.index', compact('user', 'favoriteTweets', 'tweets'));
     }
 
     /**

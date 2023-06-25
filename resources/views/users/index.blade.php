@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <x-user.tablist :user="$user" :favoriteTweets="$favoriteTweets" />
+                    <x-user.tablist :user="$user" :tweets="$tweets" :favoriteTweets="$favoriteTweets" />
                 </div>
             </div>
         </div>

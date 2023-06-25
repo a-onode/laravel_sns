@@ -9,15 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-
                     <form action="{{ route('users.search') }}" method="get" class="flex relative border-b border-gray-200 focus-within:border-indigo-600 mb-8">
                         <svg class="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
                         </svg>
                         <input type="text" name="keyword" id="keyword" class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="キーワードを検索" role="combobox" aria-expanded="false" aria-controls="options" value="@if (isset($keyword)) {{ $keyword }} @endif">
-
                         <div class="flex-shrink-0">
-                            <button type="submit" id="submit-button" class="inline-flex items-center rounded-md bg-indigo-600 'hover:bg-indigo-500' px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">投稿する</button>
+                            <button type="submit" id="submit-button" class="inline-flex items-center rounded-md bg-indigo-600 'hover:bg-indigo-500' px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">検索する</button>
                         </div>
                     </form>
                     @if (!$users->isEmpty())
@@ -88,7 +86,6 @@
                     @endif
                     <div class="mt-6">{{ $users->links() }}</div>
                 </div>
-
             </div>
         </div>
     </div>
