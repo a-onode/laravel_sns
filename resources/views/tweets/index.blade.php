@@ -81,9 +81,7 @@
                                                 <a href="#" class="hover:underline">{{ $tweet->created_at->diffForHumans() }}</a>
                                             </p>
                                         </div>
-                                        @if ($tweet->user_id === Auth::id())
-                                            <x-tweet.dropdown :tweet="$tweet" />
-                                        @endif
+                                        <x-tweet.dropdown :tweet="$tweet" />
                                     </div>
                                     <a href="{{ route('tweets.show', ['tweet' => $tweet->id]) }}">
                                         <p class="mt-2 text-gray-500">{{ $tweet->tweet }}</p>
@@ -95,42 +93,15 @@
                                             </div>
                                         </div>
                                     @endif
+                                    <x-tweet.edit-modal :tweetId="$tweet->id" :tweetText="$tweet->tweet" />
+                                    <x-tweet.delete-modal :tweetId="$tweet->id" :tweetText="$tweet->tweet" />
                                 </div>
                             </div>
                         </div>
-                        <x-tweet.edit-modal :tweetId="$tweet->id" :tweetText="$tweet->tweet" />
-                        <x-tweet.delete-modal :tweetId="$tweet->id" :tweetText="$tweet->tweet" />
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        'use strict'
-        const fileForm = document.getElementById('image');
-        const fileName = document.getElementById('file-name');
-
-        fileForm.addEventListener('change', () => {
-            if (window.File) {
-                const inputFile = fileForm.files[0];
-                console.log(inputFile.name);
-                fileName.innerText = inputFile.name;
-            }
-        });
-
-        const textField = document.getElementById('tweet');
-        const submitButton = document.getElementById('submit-button');
-
-        textField.addEventListener('keyup', () => {
-            if (textField.value !== '') {
-                submitButton.disabled = false;
-                submitButton.classList.remove('bg-indigo-200');
-                submitButton.classList.add('bg-indigo-600', 'hover:bg-indigo-500');
-            } else {
-                submitButton.disabled = true;
-                submitButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-500');
-                submitButton.classList.add('bg-indigo-200');
-            }
-        });
-    </script>
+    <script src="{{ asset('js/home.js') }}"></script>
 </x-app-layout>

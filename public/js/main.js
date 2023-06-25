@@ -4,15 +4,23 @@ $(function () {
     $('.options-button').each(function () {
         $(this).on('click', function () {
             let target = $(this).data('target');
-            let menu = document.getElementById(target);
-
-            if ($(menu).hasClass('hidden')) {
-                $(menu).fadeIn(100).removeClass('hidden');
-                return false;
+            let dropMenu = $('#' + target);
+            // drop-menuを表示
+            if (dropMenu.hasClass('hidden')) {
+                dropMenu.fadeIn(200).removeClass('hidden');
+                $('#overlay').removeClass('hidden');
             } else {
-                $(menu).fadeOut(100).addClass('hidden');
-                return false;
+                dropMenu.fadeOut(200).addClass('hidden');
+                $('#overlay').addClass('hidden');
+                $('#overlay').addClass('hidden');
             }
+            // options-buttonやdrop-menuの枠外がクリックされた場合の処理
+            $(document).mouseup(function (e) {
+                if ($('#overlay').is(e.target) && !$(e.target).hasClass('options-button')) {
+                    dropMenu.fadeOut(200).addClass('hidden');
+                    $('#overlay').addClass('hidden');
+                }
+            });
         });
     });
 });
@@ -22,12 +30,12 @@ $(function () {
         $(this).on('click', function () {
             let target = $(this).data('target');
             let modal = document.getElementById(target);
-            $(modal).fadeIn(100);
+            $(modal).fadeIn(200);
         });
     });
 
     $('.close-modal-button').on('click', function () {
-        $('.edit-modal').fadeOut(100);
+        $('.edit-modal').fadeOut(200);
         return false;
     });
 });
@@ -37,7 +45,7 @@ $(function () {
         $(this).on('click', function () {
             let target = $(this).data('target');
             let deleteModal = document.getElementById(target);
-            $(deleteModal).fadeIn(100);
+            $(deleteModal).fadeIn(200);
         });
     });
 
@@ -45,7 +53,7 @@ $(function () {
         $(this).on('click', function () {
             let target = $(this).data('target');
             let deleteModal = document.getElementById(target);
-            $(deleteModal).fadeOut(100);
+            $(deleteModal).fadeOut(200);
             return false;
         });
     });
