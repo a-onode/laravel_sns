@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email',
-            'image' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'max:2048',
             'files.*image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
